@@ -18,14 +18,14 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from utils import read_csv,lst_to_dct,median
 
-FILENAME = "/Users/niambashambu/Desktop/DS 2500/Marathon Data /boston_marathon_2022.csv"
+FILENAME = "boston_marathon_2022.csv"
 BIB_HEADER = "BibNumber"
 AGE_HEADER = "AgeOnRaceDay"
 RANK_HEADER = "RankOverall"
 GENDER_HEADER = "Gender"
 TIME_HEADER = "OfficialTime"
 NAME_HEADER = 'FullName'
-DIR = "files"
+DIR = "/Users/niambashambu/Desktop/DS 2500/Marathon Data /"
 
 
 
@@ -47,14 +47,15 @@ def get_filename(dirname, ext = ".csv"):
     filenames = []
     files = os.listdir(dirname)
     for file in files:
-        if not os.path.isdir(file) and file.endswith(ext):
-            filenames.append(dirname + "/"+ file)
+        full_path = os.path.join(dirname, file)  # Corrected to use the full path
+        if not os.path.isdir(full_path) and file.endswith(ext):  # Corrected check
+            filenames.append(full_path) 
     return filenames
 
 def main():
     # Gather data - read in the MBTA speed restrictions as a 2d list
     # and then convert to a dictionary where keys come from the header
-    data = read_csv(DIR + '/' +FILENAME)
+    data = read_csv(DIR + '/'+FILENAME)
     dct = lst_to_dct(data)
     #print(dct)    
     
