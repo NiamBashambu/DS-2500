@@ -19,6 +19,22 @@ You can assume that the window value will be a “reasonable” integer, i.e., a
 
 
 '''
-
+#fucntion call with the two parameters, one default
 def moving_avg(lst,num=2):
-    return 
+    #creating new list for which to append the new values onto
+    newlst = []
+    #range is the leng of list minus the value of which numbers to average by + 1
+    for i in range(len(lst)- num+1):
+        #finding the sum of the terms in the num value
+        num_sum = sum(lst[i:i+num])
+        #findung the average
+        num_avg = num_sum/num
+        #adding new value to the list
+        newlst.append(num_avg)
+
+    return newlst
+        
+            
+
+
+
