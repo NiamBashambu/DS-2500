@@ -58,6 +58,14 @@ def clean_data(dct, year_header):
         for i in range(len(value)):
             if not value[i].replace(" ", "").isalpha():
                 value[i] = clean_numeric(value[i])
+def plot_lines(x, ys, labels):
+    ''' given a list of x values, a 2d list of y values, and a
+        corresponding list of labels (strings)
+        plot all the ys against the same list of x's
+    '''
+    for i in range(len(ys)):
+        sns.lineplot(x = x, y = ys[i], label = labels[i])
+    plt.show()
 
 def main():
     #set up system path to look for utils
@@ -79,20 +87,16 @@ def main():
 
     clean_data(data_dct, YEAR_HEADER)
     #plot tuition vs admission rate
-    sns.lineplot(x = data_dct[YEAR_HEADER],y = data_dct[TUITION_HEADER],label = "Tuition")
-
-    sns.lineplot(x = data_dct[YEAR_HEADER], y = data_dct[ADM_HEADER],label = "admission rate")
+    plot_lines(data_dct[YEAR_HEADER], [data_dct[TUITION_HEADER], 
+                                      data_dct[ADM_HEADER]],
+               ["Tuition", "Admission Rate"])
     
-    plt.show()
-
-    #not reflective of actual admission rate
-    #normalize data
-    normalized_tui = normalize(data_dct[TUITION_HEADER])
-    normalized_adm = normalize(data_dct[ADM_HEADER])
     
-    sns.lineplot(x = data_dct[YEAR_HEADER], y = normalized_tui,label = "tuition")
-    sns.lineplot(x = data_dct[YEAR_HEADER], y = normalized_adm, label = "admission")
-    plt.show()
+    # normalize tuition/admission values, and try again
+    normal_tuition = normalize(data_dct[TUITION_HEADER])
+    normal_adm = normalize(data_dct[ADM_HEADER])
+    plot_lines(data_dct[YEAR_HEADER], [normal_tuition, normal_adm],
+               ["Tuition", "Admission Rate"])
 
 if __name__ == "__main__":
     main()
