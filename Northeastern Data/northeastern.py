@@ -31,7 +31,7 @@ import seaborn as sns
 import statistics
 import sys
 
-from utils import get_filename, read_csv, lst_to_dct, normalize
+from utils import get_filename, read_csv, lst_to_dct, normalize, moving_avg
 
 DIRECTORY = "/Users/niambashambu/Desktop/DS 2500/Northeastern Data/data"
 YEAR_HEADER = "Year"
@@ -67,6 +67,8 @@ def plot_lines(x, ys, labels):
         sns.lineplot(x = x, y = ys[i], label = labels[i])
     plt.show()
 
+
+
 def main():
     #set up system path to look for utils
     sys.path.insert(0,"../utils")
@@ -77,15 +79,18 @@ def main():
     data_dct = {}
     for file in filenames:
         data = read_csv(file)
+        if "demographics" in file:
+            demo_header = data[0][1:]
         dct = lst_to_dct(data)
         #concatinate function for dictonaries
         data_dct = {**data_dct,**dct}
-    print(data_dct)
+    
 
 
     #clean up data to get the rid of random symbols
 
     clean_data(data_dct, YEAR_HEADER)
+    '''
     #plot tuition vs admission rate
     plot_lines(data_dct[YEAR_HEADER], [data_dct[TUITION_HEADER], 
                                       data_dct[ADM_HEADER]],
@@ -97,6 +102,24 @@ def main():
     normal_adm = normalize(data_dct[ADM_HEADER])
     plot_lines(data_dct[YEAR_HEADER], [normal_tuition, normal_adm],
                ["Tuition", "Admission Rate"])
+    '''
+
+    #demographics info
+    for demo in demo_header:
+        sns.lineplot(data= data_dct, x = YEAR_HEADER, y = demo)
+        mvg = moving_avg(data_dct[demo])
+        sns.lineplot(x = data_dct[YEAR_HEADER][1:], y = mvg,color = "pink")
+        plt.title(demo)
+        plt.show()
+        
+
+        #what is the mean of the demographic info
+
+        mean = sum(data_dct[demo]) / len(data_dct[demo])
+        print(f"Mean of {demo}: {mean}")
+        stddev = statistics.stdev(data_dct[demo])
+        print(f"Std dev:{stddev}\n")
+        
 
 if __name__ == "__main__":
     main()
