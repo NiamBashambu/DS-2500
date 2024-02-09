@@ -50,3 +50,34 @@ def get_filename(dirname, ext = ".csv"):
         if not os.path.isdir(full_path) and file.endswith(ext):  # Corrected check
             filenames.append(full_path) 
     return filenames
+
+def normalize(lst):
+    '''
+    given a list of numbers, return a list of min/max normalized values
+    
+    '''
+    minn = min(lst)
+    maxx = max(lst)
+
+    normal = []
+
+    for x in lst:
+        normal_x = (x-minn)/((maxx-minn))
+        normal.append(normal_x)
+    return normal
+
+#fucntion call with the two parameters, one default
+def moving_avg(lst,num=2):
+    #creating new list for which to append the new values onto
+    newlst = []
+    #range is the leng of list minus the value of which numbers to average by + 1
+    for i in range(len(lst)- num+1):
+        #finding the sum of the terms in the num value
+        num_sum = sum(lst[i:i+num])
+        #findung the average
+        num_avg = num_sum/num
+        #adding new value to the list
+        newlst.append(num_avg)
+
+    return newlst
+        

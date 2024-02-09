@@ -31,7 +31,7 @@ import seaborn as sns
 import statistics
 import sys
 
-from utils import get_filename, read_csv, lst_to_dct
+from utils import get_filename, read_csv, lst_to_dct, normalize
 
 DIRECTORY = "/Users/niambashambu/Desktop/DS 2500/Northeastern Data/data"
 YEAR_HEADER = "Year"
@@ -58,19 +58,6 @@ def clean_data(dct, year_header):
         for i in range(len(value)):
             if not value[i].replace(" ", "").isalpha():
                 value[i] = clean_numeric(value[i])
-    
-def normalize(lst):
-    '''
-    given a list of numbers, return a list of min/max normalized values
-    
-    '''
-    mn = min(lst)
-    mx = max(lst)
-    normal = []
-    for x in lst:
-        normal_x = (x-mn)/(mx-mn)
-        normal.append(normal_x)
-    return normal
 
 def main():
     #set up system path to look for utils
