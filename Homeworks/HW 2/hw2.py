@@ -40,18 +40,37 @@ import os
 import seaborn as sns
 import matplotlib.pyplot as plt
 from utils import read_csv,lst_to_dct,median
+import statistics
+from collections import Counter
 
-FILENAME = "boston_marathon_2022.csv"
+FILENAME = "boston_marathon_2023.csv"
 BIB_HEADER = "BibNumber"
 AGE_HEADER = "AgeOnRaceDay"
 RANK_HEADER = "RankOverall"
 GENDER_HEADER = "Gender"
 TIME_HEADER = "OfficialTime"
 NAME_HEADER = 'FullName'
-DIR = "/Users/niambashambu/Desktop/DS 2500/HW 2/"
+COUNTRY_HEADER = 'CountryOfResAbbrev'
+DIR = "/Users/niambashambu/Desktop/DS 2500/Homeworks/HW 2"
 
-
-
+def clean_numeric(s):
+    ''' given a string with extra characters $ or , or %, remove them
+        and return the value as a float
+    '''
+    s = s.replace("$", "")
+    s = s.replace("%", "")
+    s = s.replace(",", "")
+    s= s.replace(":", "")
+    return float(s)
+def clean_data(dct, year_header):
+    ''' given a dictionary that includes currency and
+        numbers in the form x,xxx, clean them up and convert
+        to int/float
+    '''
+    for key, value in dct.items():
+        for i in range(len(value)):
+            if not value[i].replace(" ", "").isalpha():
+                value[i] = clean_numeric(value[i])
 def filter_age(target_age, ages, times):
     ''' given a target age, a list of ages, and a list of times,
         filter and return a list of times for runners who are the given
@@ -100,7 +119,46 @@ def main():
     mean = sum(ages)/len(ages)
     print(f"Median age: {med}, mean age: {round(mean,3)}")
     
+    #find average time ratings
+    '''
+    clean_data(dct,TIME_HEADER)
+    timesss = dct[TIME_HEADER]
+    for i in range(len(timesss)):
+        timesss[i] = int(timesss[i])
     
+    medtime = median(timesss)
+    meantime = sum(timesss)/len(timesss)
+    print(f"Median times{medtime}, mean time{meantime}  ")
+'''
+#How many women finished in the top 1000 in 2021?
+    i=0
+    gender = dct[GENDER_HEADER]
+    for genders in gender:
+        
+        if genders == "F":
+            #print(genders)
+            
+            i+=1
+
+    #print(i)
+
+    #Apart from the US, which country had the most runners in 2023? Give your answer as the country abbreviation the way it appears in the file (KAZ, THA, ETH, etc.)
+    country = dct[COUNTRY_HEADER]
+    counter = set([x for x in country if country.count(x) > 1])
+   
+           
+            
+
+    reasons_count = Counter(country)
+    most_common_reasons = reasons_count.most_common()
+    if len(most_common_reasons) > 1:
+        second_most_common_reason = most_common_reasons[1]
+        print(f"Second most common country in race: {second_most_common_reason[0:]} ")
+            
+    
+    
+
+
 
     #read everyfile in a given directory without knowing its name
     filenames = get_filename(DIR)
