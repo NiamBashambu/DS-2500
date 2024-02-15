@@ -42,8 +42,9 @@ import matplotlib.pyplot as plt
 from utils import read_csv,lst_to_dct,median
 import statistics
 from collections import Counter
+from datetime import datetime
 
-FILENAME = "boston_marathon_2023.csv"
+FILENAME = "baa_results_2013.csv"
 BIB_HEADER = "BibNumber"
 AGE_HEADER = "AgeOnRaceDay"
 RANK_HEADER = "RankOverall"
@@ -120,16 +121,20 @@ def main():
     print(f"Median age: {med}, mean age: {round(mean,3)}")
     
     #find average time ratings
-    '''
-    clean_data(dct,TIME_HEADER)
-    timesss = dct[TIME_HEADER]
-    for i in range(len(timesss)):
-        timesss[i] = int(timesss[i])
     
-    medtime = median(timesss)
-    meantime = sum(timesss)/len(timesss)
-    print(f"Median times{medtime}, mean time{meantime}  ")
-'''
+    
+    timesss = dct[TIME_HEADER]
+    z = []
+    for time in timesss:
+        pt = datetime.strptime(time,'%H:%M:%S')
+        total_seconds = pt.second + pt.minute*60 + pt.hour*3600
+        z.append(total_seconds)
+
+    
+    
+    meantime = sum(z)/len(z)
+    print(f" mean time{meantime}  ")
+
 #How many women finished in the top 1000 in 2021?
     i=0
     gender = dct[GENDER_HEADER]
@@ -156,7 +161,7 @@ def main():
         print(f"Second most common country in race: {second_most_common_reason[0:]} ")
             
     
-    
+
 
 
 
@@ -171,6 +176,8 @@ def main():
         names+= dct[NAME_HEADER]
     #print(f"{len(names)} finsihers over two years")
     #print(f"{len(set(names))} individuals over two years")
+        
+    
 
    
     
