@@ -123,12 +123,12 @@ def get_subgroup_data(directory, gender=None, country=None):
         year = filename.split("_")[-1].split(".csv")[0]  
         data = read_csv(filename)
         dct = lst_to_dct(data)
-        times = dct[TIME_HEADER][:1000]  
+        times = dct[TIME_HEADER]
 
         if gender:
-            times = [dct[TIME_HEADER][i] for i in range(len(dct[GENDER_HEADER])) if dct[GENDER_HEADER][i] == gender][:1000]
+            times = [dct[TIME_HEADER][i] for i in range(len(dct[GENDER_HEADER])) if dct[GENDER_HEADER][i] == gender]
         if country:
-            times = [dct[TIME_HEADER][i] for i in range(len(dct[COUNTRY_HEADER])) if dct[COUNTRY_HEADER][i] == country][:1000]
+            times = [dct[TIME_HEADER][i] for i in range(len(dct[COUNTRY_HEADER])) if dct[COUNTRY_HEADER][i] == country]
 
         mean_time = calculate_mean_finish_time(times)
         years.append(int(year))
@@ -222,17 +222,18 @@ def main():
     #print(f"{len(names)} finsihers over two years")
     #print(f"{len(set(names))} individuals over two years")
         
-    # Example usage to get data for correlation analysis
+    # getting the data using our new function for this specific problem
     years_women, mean_times_women = get_subgroup_data(DIR, gender="F")
     years_us, mean_times_us = get_subgroup_data(DIR, country="USA")
 
-# Calculate correlation (r-value)
-    r_value_women, _ = pearsonr(years_women, mean_times_women)
-    r_value_us, _ = pearsonr(years_us, mean_times_us)
+# Calculate correlation (r-value)#used stack overflow to learn what pearsonr was and how to use it
+    r_value_women,_= pearsonr(years_women, mean_times_women)
+    r_value_us,_ = pearsonr(years_us, mean_times_us)
 
     print(f"Correlation of year vs. mean finish time for women: {r_value_women}")
     print(f"Correlation of year vs. mean finish time for American runners: {r_value_us}")
 
+#the 2020 problem
     years_us = np.array(years_us).reshape(-1, 1)  # Reshape for sklearn
     mean_times_us = np.array(mean_times_us)
 
