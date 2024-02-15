@@ -44,7 +44,13 @@ import statistics
 from collections import Counter
 from datetime import datetime
 
-FILENAME = "baa_results_2013.csv"
+from scipy.stats import pearsonr
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+
+
+FILENAME = "boston_marathon_2010.csv"
 BIB_HEADER = "BibNumber"
 AGE_HEADER = "AgeOnRaceDay"
 RANK_HEADER = "RankOverall"
@@ -53,6 +59,7 @@ TIME_HEADER = "OfficialTime"
 NAME_HEADER = 'FullName'
 COUNTRY_HEADER = 'CountryOfResAbbrev'
 DIR = "/Users/niambashambu/Desktop/DS 2500/Homeworks/HW 2"
+
 
 def clean_numeric(s):
     ''' given a string with extra characters $ or , or %, remove them
@@ -95,6 +102,44 @@ def get_filename(dirname, ext = ".csv"):
             filenames.append(full_path) 
     return filenames
 
+def calculate_mean_finish_time(times):
+    '''Given a list of finish times in HH:MM:SS format, calculate the mean finish time in seconds.
+    same as the code as before'''
+    z = []
+    for time in times:
+        pt = datetime.strptime(time,'%H:%M:%S')
+        total_seconds = pt.second + pt.minute*60 + pt.hour*3600
+        z.append(total_seconds)
+
+    meantime = sum(z)/len(z)
+    return meantime
+
+def get_subgroup_data(directory, gender=None, country=None):
+    '''Given a directory of CSV files, filter data by gender and/or country and calculate mean finish times per year.'''
+    filenames = get_filename(directory, ".csv")
+    years = []
+    mean_finish_times = []
+    for filename in filenames:
+        year = filename.split("_")[-1].split(".csv")[0]  
+        data = read_csv(filename)
+        dct = lst_to_dct(data)
+        times = dct[TIME_HEADER][:1000]  
+
+        if gender:
+            times = [dct[TIME_HEADER][i] for i in range(len(dct[GENDER_HEADER])) if dct[GENDER_HEADER][i] == gender][:1000]
+        if country:
+            times = [dct[TIME_HEADER][i] for i in range(len(dct[COUNTRY_HEADER])) if dct[COUNTRY_HEADER][i] == country][:1000]
+
+        mean_time = calculate_mean_finish_time(times)
+        years.append(int(year))
+        mean_finish_times.append(mean_time)
+
+    return years, mean_finish_times
+
+
+
+
+
 def main():
     # Gather data - read in the MBTA speed restrictions as a 2d list
     # and then convert to a dictionary where keys come from the header
@@ -109,16 +154,16 @@ def main():
     
     #iteraing by value
         #use listslicing to look at every 20th element intstead of everyone
-    for age in ages[::20]:
-        print(f"Someone is {age} years old")
+    #for age in ages[::20]:
+    #    print(f"Someone is {age} years old")
     
     # filter to keep everyone older than me
     #master_times = filter_age(45, ages, dct[TIME_HEADER])
     #print(f"Times of everyone 45 or older: {master_times}")
     
-    med = median(ages)
-    mean = sum(ages)/len(ages)
-    print(f"Median age: {med}, mean age: {round(mean,3)}")
+    #med = median(ages)
+    #mean = sum(ages)/len(ages)
+    #print(f"Median age: {med}, mean age: {round(mean,3)}")
     
     #find average time ratings
     
@@ -167,7 +212,7 @@ def main():
 
     #read everyfile in a given directory without knowing its name
     filenames = get_filename(DIR)
-    print(filenames)
+    #print(filenames)
 
     names = []
     for filename in filenames:
@@ -177,7 +222,34 @@ def main():
     #print(f"{len(names)} finsihers over two years")
     #print(f"{len(set(names))} individuals over two years")
         
-    
+    # Example usage to get data for correlation analysis
+    years_women, mean_times_women = get_subgroup_data(DIR, gender="F")
+    years_us, mean_times_us = get_subgroup_data(DIR, country="USA")
+
+# Calculate correlation (r-value)
+    r_value_women, _ = pearsonr(years_women, mean_times_women)
+    r_value_us, _ = pearsonr(years_us, mean_times_us)
+
+    print(f"Correlation of year vs. mean finish time for women: {r_value_women}")
+    print(f"Correlation of year vs. mean finish time for American runners: {r_value_us}")
+
+    years_us = np.array(years_us).reshape(-1, 1)  # Reshape for sklearn
+    mean_times_us = np.array(mean_times_us)
+
+# Fit linear regression model
+    model = LinearRegression().fit(years_us, mean_times_us)
+
+# Predict for 2020
+    predicted_time_2020 = model.predict(np.array([[2020]]))[0]
+
+# Convert predicted time from seconds back to HH:MM:SS
+    hours, remainder = divmod(predicted_time_2020, 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    predicted_time_str = f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}"
+    print(f"Predicted mean finish time for Americans in 2020: {predicted_time_str}")
+
+
 
    
     
