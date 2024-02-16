@@ -244,6 +244,7 @@ def main():
     predicted_time_2020 = model.predict(np.array([[2020]]))[0]
 
 # Convert predicted time from seconds back to HH:MM:SS
+    #used stack overflow to figure out a bit of this
     hours, remainder = divmod(predicted_time_2020, 3600)
     minutes, seconds = divmod(remainder, 60)
 
