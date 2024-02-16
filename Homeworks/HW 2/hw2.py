@@ -208,8 +208,7 @@ def main():
     
 
 
-
-
+    '''
     #read everyfile in a given directory without knowing its name
     filenames = get_filename(DIR)
     #print(filenames)
@@ -219,10 +218,11 @@ def main():
         lst = read_csv(filename)
         dct = lst_to_dct(lst)
         names+= dct[NAME_HEADER]
+        '''
     #print(f"{len(names)} finsihers over two years")
     #print(f"{len(set(names))} individuals over two years")
         
-    # getting the data using our new function for this specific problem
+    # getting the data using function above
     years_women, mean_times_women = get_subgroup_data(DIR, gender="F")
     years_us, mean_times_us = get_subgroup_data(DIR, country="USA")
 
@@ -243,7 +243,7 @@ def main():
 # Predict for 2020
     predicted_time_2020 = model.predict(np.array([[2020]]))[0]
 
-# Convert predicted time from seconds back to HH:MM:SS
+# Convert predicted time from seconds back to the normal time thing
     #used stack overflow to figure out a bit of this
     hours, remainder = divmod(predicted_time_2020, 3600)
     minutes, seconds = divmod(remainder, 60)
