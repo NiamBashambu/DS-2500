@@ -39,13 +39,14 @@ import csv
 import os
 import seaborn as sns
 import matplotlib.pyplot as plt
-from utils import read_csv,lst_to_dct,median
+from utils import read_csv,lst_to_dct,median,normalize
 import statistics
 from collections import Counter
 from datetime import datetime
 
 from scipy.stats import pearsonr
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
 
@@ -136,7 +137,14 @@ def get_subgroup_data(directory, gender=None, country=None):
 
     return years, mean_finish_times
 
-
+def plot_lines(x, ys, labels):
+    ''' given a list of x values, a 2d list of y values, and a
+        corresponding list of labels (strings)
+        plot all the ys against the same list of x's
+    '''
+    for i in range(len(ys)):
+        sns.lineplot(x = x, y = ys[i], label = labels[i])
+    plt.show()
 
 
 
@@ -174,7 +182,7 @@ def main():
         pt = datetime.strptime(time,'%H:%M:%S')
         total_seconds = pt.second + pt.minute*60 + pt.hour*3600
         z.append(total_seconds)
-
+        
     
     
     meantime = sum(z)/len(z)
@@ -251,9 +259,12 @@ def main():
     predicted_time_str = f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}"
     print(f"Predicted mean finish time for Americans in 2020: {predicted_time_str}")
 
+# Plot #1: Linear regression plot for year vs. mean finish times of American runners
+ 
+    
 
+# Plot #2: Normalized median age and average finish times over time
    
-
    
     
     

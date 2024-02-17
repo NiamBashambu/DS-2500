@@ -38,3 +38,17 @@ def median(orig_lst):
         avg = (lst[mid] + lst[mid - 1]) / 2
         return avg
 
+def normalize(lst):
+    '''
+    given a list of numbers, return a list of min/max normalized values
+    
+    '''
+    minn = min(lst)
+    maxx = max(lst)
+
+    normal = []
+
+    for x in lst:
+        normal_x = (x-minn)/((maxx-minn))
+        normal.append(normal_x)
+    return normal
