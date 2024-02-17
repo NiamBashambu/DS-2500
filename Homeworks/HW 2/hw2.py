@@ -241,7 +241,7 @@ def main():
     print(f"Correlation of year vs. mean finish time for women: {r_value_women}")
     print(f"Correlation of year vs. mean finish time for American runners: {r_value_us}")
 
-#the 2020 problem
+#the 2020 problem #used a lot of outside help for this
     years_us = np.array(years_us).reshape(-1, 1)  # Reshape for sklearn
     mean_times_us = np.array(mean_times_us)
 
