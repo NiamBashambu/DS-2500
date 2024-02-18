@@ -262,11 +262,43 @@ def main():
 # Plot #1: Linear regression plot for year vs. mean finish times of American runners
  
     
+    # Create linear regression object
+    regmodel = LinearRegression().fit(years_us, mean_times_us)
 
-# Plot #2: Normalized median age and average finish times over time
-   
-   
     
+    # Make predictions
+    mean_finish_times_pred = regmodel.predict(years_us)
+
+    #ploting it
+    plt.figure(figsize=(10, 6))
+    sns.regplot( x= years_us, y= mean_times_us, ci=None, label='Actual Mean Finish Times')
+    plt.plot( years_us, mean_finish_times_pred, color='blue',label='Linear Regression Line')
+
+    plt.xlabel('Year')
+    plt.ylabel('Mean Finish Time (seconds)')
+    plt.title('Year vs. Mean Finish Times of American Runners')
+    plt.legend()
+    plt.show()
+'''
+# Plot #2: Normalized median age and average finish times over time
+    average_finish_times= get_subgroup_data(DIR)
+    #median_ages = 
+    #median_ages_normalized = normalize(median_ages)
+    average_finish_times_normalized = normalize(average_finish_times)
+
+# Re-plotting with custom normalization
+    plt.figure(figsize=(10, 6))
+
+    #plt.plot(years_us, median_ages_normalized, label='Normalized Median Ages', marker='o')
+    plt.plot(years_us, average_finish_times_normalized, label='Normalized Average Finish Times', marker='x')
+
+    plt.xlabel('Year')
+    plt.ylabel('Normalized Values')
+    plt.title('Changes in Median Age and Average Finish Times Over Time (Custom Normalized)')
+    plt.legend()
+    plt.show()
+   
+    '''
     
 
 if __name__ == "__main__":
