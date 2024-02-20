@@ -31,7 +31,3 @@ def mse(predicted,actual):
         
     return mean_square_error
        
-
-
-
-print(mse([1, 1, 1], [1, 5, 10]))
