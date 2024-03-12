@@ -21,7 +21,9 @@ You can assume that exactly one of the elements in each tuple is the name of one
 '''
 
 def find_majority_class(class_str,tuple_list):
-    class_counts = {class_name: 0 for class_name in class_str}
+    class_counts = {}
+    for class_name in class_str:
+        class_counts[class_name] = 0
     
     
     for current_tuple in tuple_list:
