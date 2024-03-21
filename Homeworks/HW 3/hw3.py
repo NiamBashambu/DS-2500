@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
@@ -46,3 +47,22 @@ merged_data_2000 = pd.merge(election_data_2000_winners, demographic_features, on
 merged_data_2004 = pd.merge(election_data_2004_winners, demographic_features, on='state')
 merged_data_2000 = merged_data_2000.sort_values(by='state')
 merged_data_2004 = merged_data_2004.sort_values(by='state')
+
+print(merged_data_2000)
+#creating label for the knn classifier from the party_detailed column for both 2000 and 2004
+label_encoder = LabelEncoder()
+merged_data_2000['party_encoded'] = label_encoder.fit_transform(merged_data_2000['party_detailed'])
+
+# Prepare features and target variable
+X_2000 = merged_data_2000[['percent_male', 'percent_female', 'percent_white', 'percent_black', 'percent_hispanic']]
+y_2000 = merged_data_2000['party_encoded']
+
+merged_data_2004['party_encoded'] = label_encoder.transform(merged_data_2004['party_detailed'])
+# Prepare features and target variable for 2004 data
+X_2004 = merged_data_2004[['percent_male', 'percent_female', 'percent_white', 'percent_black', 'percent_hispanic']]
+y_2004 = merged_data_2004['party_encoded']
+
+
+
+
+
