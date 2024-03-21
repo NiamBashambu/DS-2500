@@ -70,6 +70,8 @@ lowest_recall = np.inf
 highest_precision = 0
 lowest_precision = np.inf
 
+recall_scores = []
+precision_scores = []
 # Loop through potential k values #used stack overflow to help me through the part as well as the provided documentation
 for k in range(4, 11):
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -77,6 +79,11 @@ for k in range(4, 11):
     
     mean_recall = np.mean(cv_results['test_recall_macro'])
     mean_precision = np.mean(cv_results['test_precision_macro'])
+
+
+    recall_scores.append(mean_recall)
+    precision_scores.append(mean_precision)
+
     
     # Update optimal k for recall
     if mean_recall > highest_recall:
@@ -97,3 +104,37 @@ print(f"Optimal k for recall: {optimal_k_recall}, Lowest mean recall: {lowest_re
 print(f"Optimal k for precision: {optimal_k_precision}, Highest mean precision: {highest_precision}")
 
 
+X_train, X_test, y_train, y_test = train_test_split(X_2004, y_2004, random_state=0)
+
+k_optimal = 5#number found optimal for precision
+knn = KNeighborsClassifier(n_neighbors=k_optimal)
+knn.fit(X_train, y_train)
+
+y_pred = knn.predict(X_test)
+f1 = metrics.f1_score(y_test, y_pred, pos_label=1) #republician is 1
+print("F1 Score for Republican label:", f1)
+
+predicted_republican = (y_pred == 1).sum()
+print("States predicted to vote Republican:", predicted_republican)
+
+ohio_prediction = knn.predict(X_test)
+print("Ohio's predicted vote:", ohio_prediction)
+
+# Confusion Matrix Heatmap
+conf_matrix = metrics.confusion_matrix(y_test, y_pred)
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted Label')
+plt.ylabel('True Label')
+plt.title('Confusion Matrix Heatmap')
+plt.show()
+
+k_values = range(4, 11)
+plt.figure(figsize=(8, 6))
+plt.plot(k_values, recall_scores, marker='o', linestyle='-', color='blue', label='Recall')
+plt.plot(k_values, precision_scores, marker='o', linestyle='-', color='green', label='Precision')
+plt.title('Precision and Recall vs. K Value')
+plt.xlabel('K Value')
+plt.ylabel('Score')
+plt.legend()
+plt.grid(True)
+plt.show()
