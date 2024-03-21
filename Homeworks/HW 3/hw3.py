@@ -37,7 +37,7 @@ demographic_data['percent_white'] = (demographic_data['WA_MALE'] + demographic_d
 demographic_data['percent_black'] = demographic_data['Black'] / demographic_data['TOT_POP'] * 100
 demographic_data['percent_hispanic'] = demographic_data['Hispanic'] / demographic_data['TOT_POP'] * 100
 
-# pick the relevant columns
+# pick the relevant columns according to what he assignment said
 demographic_features = demographic_data[['state', 'percent_male', 'percent_female', 'percent_white', 'percent_black', 'percent_hispanic']]
 
 
@@ -118,7 +118,13 @@ predicted_republican = (y_pred == 1).sum()
 print("States predicted to vote Republican:", predicted_republican)
 
 ohio_prediction = knn.predict(X_test)
-print("Ohio's predicted vote:", ohio_prediction)
+ohio=ohio_prediction.sum()
+vote = False
+if ohio>=1:
+    vote=True
+    
+
+print("Ohio's predicted vote:", vote)
 
 # Confusion Matrix Heatmap
 conf_matrix = metrics.confusion_matrix(y_test, y_pred)
@@ -127,7 +133,7 @@ plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
 plt.title('Confusion Matrix Heatmap')
 plt.show()
-
+#precision and recall plot
 k_values = range(4, 11)
 plt.figure(figsize=(8, 6))
 plt.plot(k_values, recall_scores, marker='o', linestyle='-', color='blue', label='Recall')
