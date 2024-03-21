@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import train_test_split, KFold, cross_val_score
+from sklearn.model_selection import train_test_split, KFold, cross_val_score, cross_validate
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn import metrics
@@ -63,6 +63,37 @@ X_2004 = merged_data_2004[['percent_male', 'percent_female', 'percent_white', 'p
 y_2004 = merged_data_2004['party_encoded']
 
 
+optimal_k_recall = None
+optimal_k_precision = None
+highest_recall = 0
+lowest_recall = np.inf
+highest_precision = 0
+lowest_precision = np.inf
 
+# Loop through potential k values #used stack overflow to help me through the part as well as the provided documentation
+for k in range(4, 11):
+    knn = KNeighborsClassifier(n_neighbors=k)
+    cv_results = cross_validate(knn, X_2000, y_2000, cv=KFold(n_splits=5, random_state=0, shuffle=True), scoring=['recall_macro', 'precision_macro'])
+    
+    mean_recall = np.mean(cv_results['test_recall_macro'])
+    mean_precision = np.mean(cv_results['test_precision_macro'])
+    
+    # Update optimal k for recall
+    if mean_recall > highest_recall:
+        highest_recall = mean_recall
+        optimal_k_recall = k
+    if mean_recall < lowest_recall:
+        lowest_recall = mean_recall
+    
+    # Update optimal k for precision
+    if mean_precision > highest_precision:
+        highest_precision = mean_precision
+        optimal_k_precision = k
+    if mean_precision < lowest_precision:
+        lowest_precision = mean_precision
+
+# Output the optimal k values and the lowest scores for recall and highest score for precision
+print(f"Optimal k for recall: {optimal_k_recall}, Lowest mean recall: {lowest_recall}")
+print(f"Optimal k for precision: {optimal_k_precision}, Highest mean precision: {highest_precision}")
 
 
