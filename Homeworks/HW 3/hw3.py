@@ -72,7 +72,8 @@ lowest_precision = np.inf
 
 recall_scores = []
 precision_scores = []
-# Loop through potential k values #used stack overflow to help me through the part as well as the provided documentation
+# Loop through potential k values #used stack overflow to help me through the part as well as the provided documentation 
+#this is for the year 2000
 for k in range(4, 11):
     knn = KNeighborsClassifier(n_neighbors=k)
     cv_results = cross_validate(knn, X_2000, y_2000, cv=KFold(n_splits=5, random_state=0, shuffle=True), scoring=['recall_macro', 'precision_macro'])
