@@ -123,8 +123,6 @@ ohio=ohio_prediction.sum()
 vote = False
 if ohio>=1:
     vote=True
-    
-
 print("Ohio's predicted vote:", vote)
 
 # Confusion Matrix Heatmap
