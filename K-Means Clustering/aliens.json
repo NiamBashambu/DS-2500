@@ -1,0 +1,244 @@
+{
+    "results": [
+      {
+        "name": "stitch",
+        "slimy": 1,
+        "kill humans": 2,
+        "catchphrase": "ohana means family family means no one is left behind or forgotten"
+      },
+      {
+        "name": "E.T.",
+        "slimy": 2,
+        "kill humans": 1,
+        "catchphrase": "E.T. phone home!"
+      },
+      {
+        "name": "Harvester",
+        "slimy": 9,
+        "kill humans": 10,
+        "catchphrase": "I would like to conquer your planet"
+      },
+      {
+        "name": "kang",
+        "slimy": 10,
+        "kill humans": 8,
+        "catchphrase": "Go ahead! Throw your vote away!"
+      },
+      {
+        "name": "kodos",
+        "slimy": 10,
+        "kill humans": 7,
+        "catchphrase": "Eat, Simpsons! Grow large with food!"
+      },
+      {
+        "name": "Audrey II",
+        "slimy": 5,
+        "kill humans": 9,
+        "catchphrase": "I'm just a mean green mother from outer space and I'm mad"
+      },
+      {
+        "name": "Marvin",
+        "slimy": 3,
+        "kill humans": 6,
+        "catchphrase": "Where's the kaboom? There was supposed to be an Earth-shattering kaboom!"
+      },
+      {
+        "name": "Rocky",
+        "slimy": 1,
+        "kill humans": 1,
+        "catchphrase": "Hey, your face is leaking! I haven't seen that in a long-ass time! Remind me does that mean you're happy or sad?"
+      },
+      {
+        "name": "Barsoomus invadus",
+        "slimy": 5,
+        "kill humans": 8,
+        "catchphrase": "Don't run! We are your friends!"
+      },
+      {
+        "name": "Queller",
+        "slimy": 7.5,
+        "kill humans": 3.5,
+        "catchphrase": "grrr! argh!"
+      },
+      {
+        "name": "One-Eyed, One-Horned Flying Purple People Eater",
+        "slimy": 4,
+        "kill humans": 10,
+        "catchphrase": "Looks like a purple peope eater to me!"
+      },
+      {
+        "name": "Groot",
+        "slimy": 1,
+        "kill humans": 2,
+        "catchphrase": "I am Groot"
+      },
+      {
+        "name": "Worms",
+        "slimy": 4,
+        "kill humans": 1,
+        "catchphrase": "You're back! Somebody said you were dead"
+      },
+      {
+        "name": "Terminator",
+        "slimy": 1,
+        "kill humans": 10,
+        "catchphrase": "I'll be back"
+      },
+      {
+        "name": "Killer Klown",
+        "slimy": 2,
+        "kill humans": 10,
+        "catchphrase": "They took your wife away in a balloon? Well you don't need the police, pal, you need a psychiatrist!"
+      },
+      {
+        "name": "Predator",
+        "slimy": 8,
+        "kill humans": 10,
+        "catchphrase": "The predator wants your silence"
+      },
+      {
+        "name": "Xenomorph",
+        "slimy": 9,
+        "kill humans": 7,
+        "catchphrase": "There have to be reasons that you get up in the morning and you want to live"
+      },
+      {
+        "name": "Morbo",
+        "slimy": 8,
+        "kill humans": 3.5,
+        "catchphrase": "A Gigantic Ball Of Garbage Will Destroy Their Puny City"
+      },
+      {
+        "name": "Pennywise",
+        "slimy": 7,
+        "kill humans": 10,
+        "catchphrase": "You'll float too!"
+      },
+      {
+        "name": "Chewbacca",
+        "slimy": 3,
+        "kill humans": 5,
+        "catchphrase": "Fixing the Millennium Falcon"
+      },
+      {
+        "name": "Kal-El",
+        "slimy": 0,
+        "kill humans": 1,
+        "catchphrase": "Truth, Justice and a Better Tomorrow"
+      },
+      {
+        "name": "Na'vi",
+        "slimy": 2,
+        "kill humans": 6,
+        "catchphrase": "Protect the home world!"
+      },
+      {
+        "name": "Thanos",
+        "slimy": 1,
+        "kill humans": 7.5,
+        "catchphrase": "Run from it, dread it, destiny still arrives"
+      },
+      {
+        "name": "Mimic",
+        "slimy": 5,
+        "kill humans": 9,
+        "catchphrase": "Kill all life!"
+      },
+      {
+        "name": "Kaiju",
+        "slimy": 8,
+        "kill humans": 8.5,
+        "catchphrase": "Bigger the size, bigger the threat"
+      },
+      {
+        "name": "The Long Ones",
+        "slimy": 8.5,
+        "kill humans": 7,
+        "catchphrase": "Slither and devour"
+      },
+      {
+        "name": "Decepticon",
+        "slimy": 3,
+        "kill humans": 9,
+        "catchphrase": "Decepticons attack!"
+      },
+      {
+        "name": "Calvin",
+        "slimy": 6,
+        "kill humans": 8,
+        "catchphrase": "Evolution is the key"
+      },
+      {
+        "name": "Harvesters",
+        "slimy": 6.5,
+        "kill humans": 8.5,
+        "catchphrase": "My ship is all banged up"
+      },
+      {
+        "name": "Blob",
+        "slimy": 10,
+        "kill humans": 10,
+        "catchphrase": "It'so slimy"
+      },
+      {
+        "name": "Bumblebee",
+        "slimy": 2,
+        "kill humans": 2,
+        "catchphrase": "Don't worry about the size of the blaster-worry about the sting"
+      },
+      {
+        "name": "Kilowatt",
+        "slimy": 0.5,
+        "kill humans": 1,
+        "catchphrase": "I don't need a battery!"
+      },
+      {
+        "name": "Alf",
+        "slimy": 3,
+        "kill humans": 0.5,
+        "catchphrase": "Ha! I kill me!"
+      },
+      {
+        "name": "Spock",
+        "slimy": 1,
+        "kill humans": 3,
+        "catchphrase": "Live long and prosper"
+      },
+      {
+        "name": "The Thing",
+        "slimy": 10,
+        "kill humans": 10,
+        "catchphrase": "Shift shape, kill things"
+      },
+      {
+        "name": "Roger",
+        "slimy": 1,
+        "kill humans": 0.5,
+        "catchphrase": "Is there and ethicist in the house?"
+      },
+      {
+        "name": "Paul",
+        "slimy": 2,
+        "kill humans": 1.5,
+        "catchphrase": "To you I am an alien, yes"
+      },
+      {
+        "name": "Heptapods",
+        "slimy": 4,
+        "kill humans": 3,
+        "catchphrase": "--silence--"
+      },
+      {
+        "name": "The engineer",
+        "slimy": 5,
+        "kill humans": 6,
+        "catchphrase": "From the past, still supreme"
+      },
+      {
+        "name": "Mosa",
+        "slimy": 4,
+        "kill humans": 6,
+        "catchphrase": "Not the Glock man come on!"
+      }
+    ]
+  }
