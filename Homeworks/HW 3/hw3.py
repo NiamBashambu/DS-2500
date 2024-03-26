@@ -131,7 +131,7 @@ print("Ohio's predicted vote:", vote)
 
 # confusion matrix heatmap
 conf_matrix = metrics.confusion_matrix(y_test, y_pred)
-sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='magma  ')
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='magma')
 plt.xlabel('Predicted Label')
 plt.ylabel('True Label')
 plt.title('Confusion Matrix Heatmap')
