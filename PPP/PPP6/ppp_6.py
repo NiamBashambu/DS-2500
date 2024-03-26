@@ -46,6 +46,6 @@ def compute_centroids(data_frame,k):
         avg_x = data_cluster('x').mean()
         avg_y = data_cluster("y").mean()
 
-        centroids.append(avg_x,avg_y)
+        centroids.append((avg_x,avg_y))
 
     return centroids
