@@ -39,5 +39,13 @@ You can assume that clusters are numbered 0, 1, ..., k-1.
 
 '''
 
-def compute_centroids(data_frame):
-    
+def compute_centroids(data_frame,k):
+    centroids = []
+    for centroid in range(k):
+        data_cluster = data_frame[data_frame["cluster"]==centroid]
+        avg_x = data_cluster('x').mean()
+        avg_y = data_cluster("y").mean()
+
+        centroids.append(avg_x,avg_y)
+
+    return centroids
