@@ -38,7 +38,7 @@ You can assume that clusters are numbered 0, 1, ..., k-1.
 
 
 '''
-
+import pandas as pd
 def compute_centroids(data_frame,k):
     centroids = []
     for centroid in range(k):
