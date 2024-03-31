@@ -32,7 +32,7 @@ reduced_data = pca.fit_transform(vecotrized.toarray())
 df[["pca1","pca2"]] = reduced_data
 
 #found the optimal number using elbow method as seen below
-K = 3
+K = 4
 #assigning the centroids using the function created in class and creating the plot that will showcase this
 def assign_centroids(df, centroids, x , y):
     centroid_assignments = []
