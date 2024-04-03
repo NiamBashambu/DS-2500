@@ -21,6 +21,7 @@ URL = "https://newsapi.org/v2/everything?q=fortnite&apiKey=48828f97cb2547a484a46
 #getting the data and normalizing the dataframe
 response = requests.get(URL)
 data = response.json()
+print(data)
 articles = data["articles"]
 df = pd.json_normalize(articles)
 
